@@ -24,6 +24,7 @@ class CardFeature extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        height: 108,
         width: effectiveWidth,
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
         decoration: BoxDecoration(
@@ -53,6 +54,8 @@ class CardFeature extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: AppFont.smallPrimary(
                 context,
