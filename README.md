@@ -18,9 +18,11 @@ samples, guidance on mobile development, and a full API reference.
 generate assets
 dart run build_runner build
 
-![Home Page](screenshoot/home_page.png)
+![Home Page](screenshoot/home_page.png | width=200)
 
-![List Doctor](screenshoot/list_doctor.png)
+![List Doctor](screenshoot/list_doctor.png | width=200)
 
-![todo](screenshoot/todo.jpeg)
+![Todo / Publish Form](screenshoot/todo.jpeg | width=200)
+
+**Todo**  
 publish message title dan desc ke mqtt dan subcribe juga untuk ditampilkan, data sebelumnya di simpan di local storage menggunakan hive
