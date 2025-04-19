@@ -1,9 +1,5 @@
 part of 'themes.dart';
 
-///
-/// Created by alfianhpratama on 10/11/22
-///
-
 class AppColorData {
   final Color primary;
   final Color secondary;

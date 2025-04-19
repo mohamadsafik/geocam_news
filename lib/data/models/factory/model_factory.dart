@@ -1,10 +1,17 @@
 import 'dart:developer';
-import 'package:rs_ui/data/models/base/user.dart';
+
+import '../base/article.dart';
+import '../base/source.dart';
+import '../base/user.dart';
 
 Object factoryModel(String type, {Map<String, dynamic>? json}) {
   switch (type) {
     case 'User':
       return json != null ? User.fromJson(json) : User();
+    case 'Article':
+      return json != null ? Article.fromJson(json) : Article();
+    case 'Source':
+      return json != null ? Source.fromJson(json) : Source();
     case 'dynamic':
       return json != null ? DefaultModel(json) : DefaultModel({});
     default:

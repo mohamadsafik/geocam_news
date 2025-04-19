@@ -7,8 +7,8 @@ part of 'response.dart';
 // **************************************************************************
 
 BaseResponse _$BaseResponseFromJson(Map<String, dynamic> json) => BaseResponse(
-  status: (json['status'] as num).toInt(),
-  message: json['message'] as String,
+  status: json['status'] as String,
+  message: json['message'] as String?,
 );
 
 Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
@@ -16,10 +16,14 @@ Map<String, dynamic> _$BaseResponseToJson(BaseResponse instance) =>
 
 ApiResponse<T> _$ApiResponseFromJson<T>(Map<String, dynamic> json) =>
     ApiResponse<T>(
-      status: (json['status'] as num).toInt(),
-      message: json['message'] as String,
+      status: json['status'] as String,
+      message: json['message'] as String?,
       data: _$JsonConverterFromJson<Object, T>(
         json['data'],
+        Converter<T?>().fromJson,
+      ),
+      articles: _$JsonConverterFromJson<Object, T>(
+        json['articles'],
         Converter<T?>().fromJson,
       ),
     );
@@ -30,6 +34,10 @@ Map<String, dynamic> _$ApiResponseToJson<T>(ApiResponse<T> instance) =>
       'message': instance.message,
       'data': _$JsonConverterToJson<Object, T>(
         instance.data,
+        Converter<T?>().toJson,
+      ),
+      'articles': _$JsonConverterToJson<Object, T>(
+        instance.articles,
         Converter<T?>().toJson,
       ),
     };
@@ -46,10 +54,15 @@ Json? _$JsonConverterToJson<Json, Value>(
 
 ApiResponseList<T> _$ApiResponseListFromJson<T>(Map<String, dynamic> json) =>
     ApiResponseList<T>(
-      status: (json['status'] as num).toInt(),
-      message: json['message'] as String,
+      status: json['status'] as String,
+      message: json['message'] as String?,
       data:
           (json['data'] as List<dynamic>?)
+              ?.map((e) => Converter<T>().fromJson(e as Object))
+              .toList() ??
+          const [],
+      articles:
+          (json['articles'] as List<dynamic>?)
               ?.map((e) => Converter<T>().fromJson(e as Object))
               .toList() ??
           const [],
@@ -62,6 +75,7 @@ Map<String, dynamic> _$ApiResponseListToJson<T>(ApiResponseList<T> instance) =>
       'status': instance.status,
       'message': instance.message,
       'data': instance.data.map(Converter<T>().toJson).toList(),
+      'articles': instance.articles?.map(Converter<T>().toJson).toList(),
       'total_data': instance.totalData,
       'total_page': instance.totalPage,
     };

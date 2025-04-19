@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:rs_ui/engine/engine.dart';
+import 'package:geocam_news/engine/engine.dart';
 
 enum LoadingType { always, hidden, normal }
 

@@ -1,4 +1,4 @@
-package com.example.rs.rs_ui
+package com.example.rs.geocam_news
 
 import io.flutter.embedding.android.FlutterActivity
 

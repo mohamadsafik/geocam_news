@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rs_ui/data/api/configure.dart';
-import 'package:rs_ui/data/api/error_handler.dart';
-import 'package:rs_ui/data/api/response.dart';
-import 'package:rs_ui/data/models/base/user.dart';
-import 'package:rs_ui/engine/helpers/sessions.dart';
+import 'package:geocam_news/data/api/configure.dart';
+import 'package:geocam_news/data/api/error_handler.dart';
+import 'package:geocam_news/data/api/response.dart';
+import 'package:geocam_news/data/models/base/article.dart';
+import 'package:geocam_news/data/models/base/user.dart';
+import 'package:geocam_news/engine/helpers/sessions.dart';
 
 class ApiService {
   static Future<ApiResponse<String>> getToken(BuildContext context) async {
@@ -52,62 +53,18 @@ class ApiService {
         .handler((error) => ApiResponse<String>.onError(error));
   }
 
-  static Future<ApiResponse<User>> register(
-    BuildContext context, {
-    required Map<String, dynamic> params,
-  }) async {
-    return await ApiConfigure(context)
-        .post('auth/register', params: params)
-        .then((result) => ApiResponse<User>.fromJson(result.data))
-        .handler((error) => ApiResponse<User>.onError(error));
-  }
-
-  static Future<ApiResponse<User>> login(
-    BuildContext context, {
-    required String email,
-    required String password,
-  }) async {
-    return await ApiConfigure(context)
-        .post('auth/login', params: {"email": email, "password": password})
-        .then((result) => ApiResponse<User>.fromJson(result.data))
-        .handler((error) => ApiResponse<User>.onError(error));
-  }
-
-  static Future<ApiResponse> addToCart(
-    BuildContext context, {
-    required int idProduct,
-    required int quantity,
-  }) async {
-    return await ApiConfigure(context)
-        .post(
-          'cart/add_to_cart',
-          params: {
-            "id_user": Sessions.getUserId(),
-            "id_product": idProduct,
-            "quantity": quantity,
-          },
-        )
-        .then((result) => ApiResponse.fromJson(result.data))
-        .handler((error) => ApiResponse.onError(error));
-  }
-
-  static Future<ApiResponse> removeFromCart(
-    BuildContext context, {
-    required int idCart,
-  }) async {
-    return await ApiConfigure(context)
-        .post('cart/remove_from_cart', params: {"id": idCart})
-        .then((result) => ApiResponse.fromJson(result.data))
-        .handler((error) => ApiResponse.onError(error));
-  }
-
-  static Future<ApiResponse> payment(
+  static Future<ApiResponseList<Article>> getNews(
     BuildContext context, {
     required List<int> idCart,
   }) async {
     return await ApiConfigure(context)
-        .post('cart/payment', params: {"cart_ids": idCart})
-        .then((result) => ApiResponse.fromJson(result.data))
-        .handler((error) => ApiResponse.onError(error));
+        .get(
+          'v2/everything?q=Apple&from=2025-03-19&sortBy=popularity&apiKey=09d1c5799e4b4102905dfafc09e67c8e',
+          // params: {"cart_ids": idCart},
+        )
+        .then((result) => ApiResponseList<Article>.fromJson(result.data))
+        .handler((error) => ApiResponseList<Article>.onError(error));
   }
+
+  //
 }

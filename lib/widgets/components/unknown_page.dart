@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rs_ui/themes/themes.dart';
+import 'package:geocam_news/themes/themes.dart';
 
 class UnknownPage extends StatelessWidget {
   const UnknownPage({super.key});

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocam_news/data/models/base/article.dart';
+import 'package:geocam_news/modules/bookmark/cubit/bookmark_article_cubit.dart';
+import 'package:geocam_news/modules/bookmark/view/bookmark_article.dart';
+import 'package:geocam_news/modules/detail_news/view/detail_new.dart';
+import 'package:geocam_news/modules/location/cubit/location_cubit.dart';
+import 'package:geocam_news/modules/location/view/location_page.dart';
+import 'package:geocam_news/modules/news/cubit/news_cubit.dart';
+import 'package:geocam_news/modules/news/view/news.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:rs_ui/modules/auth/login/views/login.dart';
-import 'package:rs_ui/modules/dashboard/dashboard.dart';
-import 'package:rs_ui/modules/list_doctor/cubit/list_doctor_cubit.dart';
-import 'package:rs_ui/modules/list_doctor/view/list_doctor.dart';
-import 'package:rs_ui/modules/todo/cubit/todo_cubit.dart';
-import 'package:rs_ui/modules/todo/view/todo_page.dart';
-import 'package:rs_ui/widgets/widgets.dart';
+import 'package:geocam_news/widgets/widgets.dart';
 
-import '../modules/auth/login/cubit/login_cubit.dart';
-import '../modules/auth/register/cubit/register_cubit.dart';
-import '../modules/auth/register/views/register.dart';
 import '../modules/splash/cubit/splash_cubit.dart';
 import '../modules/splash/views/splash_page.dart';
 
@@ -31,54 +30,43 @@ class Routes implements RouterInterface {
           );
         },
       ),
+
       GoRoute(
-        name: RouteNames.register,
-        path: RouteNames.register,
+        name: RouteNames.location,
+        path: RouteNames.location,
         builder: (ctx, GoRouterState state) {
           return BlocProvider(
-            create: (ctx) => RegisterCubit(ctx),
-            child: const RegisterPage(),
+            create: (ctx) => LocationCubit(ctx),
+            child: const LocationPage(),
           );
         },
       ),
       GoRoute(
-        name: RouteNames.login,
-        path: RouteNames.login,
+        name: RouteNames.listOfNews,
+        path: RouteNames.listOfNews,
         builder: (ctx, GoRouterState state) {
           return BlocProvider(
-            create: (ctx) => LoginCubit(ctx),
-            child: const LoginPage(),
+            create: (ctx) => NewsCubit(ctx),
+            child: const ListNews(),
           );
         },
       ),
       GoRoute(
-        name: RouteNames.dashboard,
-        path: RouteNames.dashboard,
+        name: RouteNames.bookmark,
+        path: RouteNames.bookmark,
         builder: (ctx, GoRouterState state) {
           return BlocProvider(
-            create: (ctx) => DashboardCubit(ctx),
-            child: const DashboardPage(),
+            create: (ctx) => BookmarkArticleCubit(ctx),
+            child: const BookmarkArticle(),
           );
         },
       ),
       GoRoute(
-        name: RouteNames.listDoctor,
-        path: RouteNames.listDoctor,
-        builder: (ctx, GoRouterState state) {
-          return BlocProvider(
-            create: (ctx) => ListDoctorCubit(ctx),
-            child: const ListDoctorPage(),
-          );
-        },
-      ),
-      GoRoute(
-        name: RouteNames.todo,
-        path: RouteNames.todo,
-        builder: (ctx, GoRouterState state) {
-          return BlocProvider(
-            create: (ctx) => TodoCubit(ctx),
-            child: const TodoPage(),
-          );
+        path: '/detail-article',
+        name: RouteNames.detailArticle,
+        builder: (context, state) {
+          final article = state.extra as Article;
+          return DetailNewsPage(article: article);
         },
       ),
     ],

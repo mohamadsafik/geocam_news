@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rs_ui/engine/engine.dart';
-import 'package:rs_ui/themes/themes.dart';
+import 'package:geocam_news/engine/engine.dart';
+import 'package:geocam_news/themes/themes.dart';
 
 import '../../resources/resources.dart';
 

@@ -1,17 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rs_ui/engine/helpers/constants.dart';
+import 'package:geocam_news/engine/helpers/constants.dart';
 import '../../engine/helpers/converter.dart';
 
 part 'response.g.dart';
 
 @JsonSerializable()
 class BaseResponse {
-  final int status;
-  final String message;
+  final String status;
+  final String? message;
 
   bool get isSuccess => status == APIResult.success;
 
-  BaseResponse({required this.status, required this.message});
+  BaseResponse({required this.status, this.message});
 
   factory BaseResponse.fromJson(Map<String, dynamic> json) =>
       _$BaseResponseFromJson(json);
@@ -23,9 +23,10 @@ class BaseResponse {
 class ApiResponse<T> extends BaseResponse {
   @Converter()
   final T? data;
+  @Converter()
+  final T? articles;
 
-  ApiResponse({required int status, required String message, this.data})
-    : super(status: status, message: message);
+  ApiResponse({required super.status, super.message, this.data, this.articles});
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) =>
       _$ApiResponseFromJson(json);
@@ -41,6 +42,8 @@ class ApiResponse<T> extends BaseResponse {
 class ApiResponseList<T> extends BaseResponse {
   @Converter()
   final List<T> data;
+  @Converter()
+  final List<T>? articles;
 
   @JsonKey(name: 'total_data')
   final int totalData;
@@ -48,12 +51,13 @@ class ApiResponseList<T> extends BaseResponse {
   final int totalPage;
 
   ApiResponseList({
-    required int status,
-    required String message,
+    required super.status,
+    required super.message,
     this.data = const [],
+    this.articles = const [],
     this.totalData = 10,
     this.totalPage = 1,
-  }) : super(status: status, message: message);
+  });
 
   factory ApiResponseList.fromJson(Map<String, dynamic> json) =>
       _$ApiResponseListFromJson(json);

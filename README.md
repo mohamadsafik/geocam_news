@@ -1,28 +1,55 @@
-# rs_ui
+# geocam_news
 
-A new Flutter project.
+# run aplikasi
 
-## Getting Started
+Install Dependencies
+Jalankan perintah berikut untuk mengunduh semua dependency:
+flutter pub get
 
-This project is a starting point for a Flutter application.
+Generate Code (Jika Diperlukan)
+Jika menggunakan library seperti freezed atau json_serializable, jalankan:
+flutter pub run build_runner build --delete-conflicting-outputs
 
-A few resources to get you started if this is your first Flutter project:
+Build APK
+Untuk membangun aplikasi Android:
+flutter build apk
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Run Aplikasi
+Jalankan aplikasi di emulator atau perangkat fisik:
+flutter run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# library
 
-generate assets
-dart run build_runner build
+dio :
+untuk network atau call api dan error handler api
 
-<img src="screenshoot/home_page.png" alt="Home Page" width="300"/>
+bloc/cubit :
+penggunaan state management dalam aplikasi flutter ini
+get_storage :
+Penyimpanan data lokal storage
 
-<img src="screenshoot/list_doctor.png" alt="List Doctor" width="300"/>
+intl :
+initializeDateFormatting untuk mengatur format tanggal sesuai bahasa aplikasi.
 
-<img src="screenshoot/todo.jpeg" alt="Todo / Publish Form" width="300"/>
+freezed :
+Digunakan untuk membuat kelas immutable dan union types.
+Membantu menangani berbagai jenis error dengan cara yang lebih terstruktur.
+Contoh penggunaannya adalah untuk mendefinisikan NetworkExceptions dan class model yang digunakan dalam aplikasi ini.
+
+# SDLC
+
+- reqruitment kebutuhan
+- perencanaan
+- desain
+- implementasi pengembangan
+
+<img src="screenshoot/location.png" alt="Home Page" width="300"/>
+
+<img src="screenshoot/list_news.png" alt="List Doctor" width="300"/>
+
+<img src="screenshoot/bookmark.jpeg" alt="Todo / Publish Form" width="300"/>
+
+<img src="screenshoot/detail_news.jpeg" alt="Todo / Publish Form" width="300"/>
 
 **Todo**  
 publish message title dan desc ke mqtt dan subcribe juga untuk ditampilkan, data sebelumnya di simpan di local storage menggunakan hive

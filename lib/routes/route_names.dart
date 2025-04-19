@@ -5,9 +5,8 @@ class RouteNames {
 
   static const String root = "/";
   static const String splash = "/splash";
-  static const String register = "/register";
-  static const String login = "/login";
-  static const String dashboard = "/dashboard";
-  static const String listDoctor = "/dashboard/list_doctor";
-  static const String todo = "/todo";
+  static const String location = "/location";
+  static const String listOfNews = "/list_of_news";
+  static const String bookmark = "/list_of_bookmark_news";
+  static const String detailArticle = "/detail_article";
 }

@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:rs_ui/engine/configs/environment.dart';
-import 'package:rs_ui/engine/configs/main_cubit.dart';
-import 'package:rs_ui/engine/extensions/color.dart';
+import 'package:geocam_news/engine/configs/environment.dart';
+import 'package:geocam_news/engine/configs/main_cubit.dart';
+import 'package:geocam_news/engine/extensions/color.dart';
 
 import '../../routes/routes.dart';
 

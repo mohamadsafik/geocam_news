@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:intl/intl.dart';
-import 'package:rs_ui/engine/configs/environment.dart';
+import 'package:geocam_news/engine/configs/environment.dart';
 
 extension StringExtension on String {
   String toUpperCaseFirstLetter() {

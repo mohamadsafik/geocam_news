@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rs_ui/engine/engine.dart';
+import 'package:geocam_news/engine/engine.dart';
 
 class ContainerCollapse extends StatefulWidget {
   final String title;

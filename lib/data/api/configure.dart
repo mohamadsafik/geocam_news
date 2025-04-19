@@ -15,8 +15,8 @@ class ApiConfigure {
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
-        connectTimeout: Duration(seconds: 30),
-        receiveTimeout: Duration(seconds: 30),
+        connectTimeout: Duration(seconds: 12),
+        receiveTimeout: Duration(seconds: 12),
         headers: {'Content-Type': 'application/json'},
       ),
     );
@@ -31,7 +31,7 @@ class ApiConfigure {
     }
   }
 
-  Response onErrorResponse(DioError error) {
+  Response onErrorResponse(DioException error) {
     return Response(
       requestOptions: error.requestOptions,
       data: {

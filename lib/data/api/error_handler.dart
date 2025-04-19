@@ -2,13 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:rs_ui/data/api/network_exceptions.dart';
 
-import 'package:rs_ui/data/api/response.dart';
-
-///
-/// Created by alfianhpratama on 08/11/22
-///
+import '../services.dart';
 
 class ErrorHandler {
   static BaseResponse getDioException(error) {
@@ -26,25 +21,6 @@ class ErrorHandler {
               break;
             case DioExceptionType.receiveTimeout:
               networkExceptions = const NetworkExceptions.sendTimeout();
-              break;
-            case DioExceptionType.cancel:
-              networkExceptions = const NetworkExceptions.requestCancelled();
-              break;
-            case DioExceptionType.unknown:
-              networkExceptions = NetworkExceptions.defaultError(
-                "Error ${error.message}",
-              );
-              break;
-            case DioExceptionType.badCertificate:
-              networkExceptions = NetworkExceptions.defaultError(
-                "Error ${error.message}",
-              );
-              break;
-
-            case DioExceptionType.connectionError:
-              networkExceptions = NetworkExceptions.defaultError(
-                "Error ${error.message}",
-              );
               break;
             case DioExceptionType.badResponse:
               status = error.response?.statusCode ?? 405;
@@ -88,6 +64,22 @@ class ErrorHandler {
                   );
               }
               break;
+            case DioExceptionType.cancel:
+              networkExceptions = const NetworkExceptions.requestCancelled();
+              break;
+            case DioExceptionType.unknown:
+              networkExceptions = NetworkExceptions.defaultError(
+                "Error ${error.message}",
+              );
+              break;
+            case DioExceptionType.badCertificate:
+              networkExceptions = NetworkExceptions.defaultError(
+                "Error ${error.message}",
+              );
+            case DioExceptionType.connectionError:
+              networkExceptions = NetworkExceptions.defaultError(
+                "Error ${error.message}",
+              );
           }
         } else if (error is SocketException) {
           networkExceptions = const NetworkExceptions.noInternetConnection();
@@ -95,17 +87,17 @@ class ErrorHandler {
           networkExceptions = const NetworkExceptions.unexpectedError();
         }
         return BaseResponse(
-          status: status,
+          status: status.toString(),
           message: getErrorMessage(networkExceptions),
         );
       } on FormatException {
         return BaseResponse(
-          status: status,
+          status: status.toString(),
           message: getErrorMessage(const NetworkExceptions.formatException()),
         );
       } catch (_) {
         return BaseResponse(
-          status: status,
+          status: status.toString(),
           message: getErrorMessage(const NetworkExceptions.unexpectedError()),
         );
       }
@@ -113,12 +105,12 @@ class ErrorHandler {
       log(error.toString());
       if (error.toString().contains("is not a subtype of")) {
         return BaseResponse(
-          status: status,
+          status: status.toString(),
           message: getErrorMessage(const NetworkExceptions.unableToProcess()),
         );
       } else {
         return BaseResponse(
-          status: status,
+          status: status.toString(),
           message: getErrorMessage(
             NetworkExceptions.defaultError(error.toString()),
           ),
@@ -128,61 +120,43 @@ class ErrorHandler {
   }
 
   static String getErrorMessage(NetworkExceptions networkExceptions) {
-    var errorMessage = "";
-    // networkExceptions.when(
-    //   notImplemented: () {
-    //     errorMessage = "Not Implemented";
-    //   },
-    //   requestCancelled: () {
-    //     errorMessage = "Request Cancelled";
-    //   },
-    //   internalServerError: () {
-    //     errorMessage = "Internal Server Error";
-    //   },
-    //   notFound: (String reason) {
-    //     errorMessage = reason;
-    //   },
-    //   serviceUnavailable: () {
-    //     errorMessage = "Service unavailable";
-    //   },
-    //   methodNotAllowed: () {
-    //     errorMessage = "Method Allowed";
-    //   },
-    //   badRequest: () {
-    //     errorMessage = "Bad request";
-    //   },
-    //   unauthorisedRequest: () {
-    //     errorMessage = "Unauthorised request";
-    //   },
-    //   unexpectedError: () {
-    //     errorMessage = "Unexpected error occurred";
-    //   },
-    //   requestTimeout: () {
-    //     errorMessage = "Connection request timeout";
-    //   },
-    //   noInternetConnection: () {
-    //     errorMessage = "No internet connection";
-    //   },
-    //   conflict: () {
-    //     errorMessage = "Error due to a conflict";
-    //   },
-    //   sendTimeout: () {
-    //     errorMessage = "Send timeout in connection with API server";
-    //   },
-    //   unableToProcess: () {
-    //     errorMessage = "Unable to process the data";
-    //   },
-    //   defaultError: (String error) {
-    //     errorMessage = error;
-    //   },
-    //   formatException: () {
-    //     errorMessage = "Unexpected error occurred";
-    //   },
-    //   notAcceptable: () {
-    //     errorMessage = "Not acceptable";
-    //   },
-    // );
-    return errorMessage;
+    if (networkExceptions is NotImplemented) {
+      return "Not Implemented";
+    } else if (networkExceptions is RequestCancelled) {
+      return "Request Cancelled";
+    } else if (networkExceptions is InternalServerError) {
+      return "Internal Server Error";
+    } else if (networkExceptions is NotFound) {
+      return (networkExceptions).reason;
+    } else if (networkExceptions is ServiceUnavailable) {
+      return "Service unavailable";
+    } else if (networkExceptions is MethodNotAllowed) {
+      return "Method Allowed";
+    } else if (networkExceptions is BadRequest) {
+      return "Bad request";
+    } else if (networkExceptions is UnauthorisedRequest) {
+      return "Unauthorised request";
+    } else if (networkExceptions is UnexpectedError) {
+      return "Unexpected error occurred";
+    } else if (networkExceptions is RequestTimeout) {
+      return "Connection request timeout";
+    } else if (networkExceptions is NoInternetConnection) {
+      return "No internet connection";
+    } else if (networkExceptions is Conflict) {
+      return "Error due to a conflict";
+    } else if (networkExceptions is SendTimeout) {
+      return "Send timeout in connection with API server";
+    } else if (networkExceptions is UnableToProcess) {
+      return "Unable to process the data";
+    } else if (networkExceptions is DefaultError) {
+      return (networkExceptions).error;
+    } else if (networkExceptions is FormatException) {
+      return "Unexpected error occurred";
+    } else if (networkExceptions is NotAcceptable) {
+      return "Not acceptable";
+    } else {
+      return "Unknown error occurred";
+    }
   }
 }
 
