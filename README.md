@@ -52,12 +52,15 @@ Ambil latitude, longitude dan ambil foto kemudian di save di local storage.pengg
 
 **Daftar berita/homepage**  
 mengambil berita dari api news dan ada fitur untuk bookmark(add/remove) serta lihat daftar berita yang sudah di bookmark
+
 <img src="screenshoot/list_news.png" alt="List Doctor" width="300"/>
 
 **Daftar daftar berita bookmark**  
 melihat hasil bookmark yang di ambil dari lokal storage
+
 <img src="screenshoot/bookmark.png" alt="Todo / Publish Form" width="300"/>
 
 **Daftar daftar berita bookmark**  
 melihat detail berita, title, image, content
+
 <img src="screenshoot/detail_news.png" alt="Todo / Publish Form" width="300"/>
