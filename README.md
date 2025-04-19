@@ -36,6 +36,9 @@ Digunakan untuk membuat kelas immutable dan union types.
 Membantu menangani berbagai jenis error dengan cara yang lebih terstruktur.
 Contoh penggunaannya adalah untuk mendefinisikan NetworkExceptions dan class model yang digunakan dalam aplikasi ini.
 
+push_to_refresh :
+untuk reload dan refresh data yang ditampilkan
+
 # SDLC
 
 - reqruitment kebutuhan
@@ -43,13 +46,18 @@ Contoh penggunaannya adalah untuk mendefinisikan NetworkExceptions dan class mod
 - desain
 - implementasi pengembangan
 
+**Lokasi**  
+Ambil latitude, longitude dan ambil foto kemudian di save di local storage.penggunaan foto dari emulator dengan default kamera hijau seperti difoto
 <img src="screenshoot/location.png" alt="Home Page" width="300"/>
 
+**Daftar berita/homepage**  
+mengambil berita dari api news dan ada fitur untuk bookmark(add/remove) serta lihat daftar berita yang sudah di bookmark
 <img src="screenshoot/list_news.png" alt="List Doctor" width="300"/>
 
-<img src="screenshoot/bookmark.jpeg" alt="Todo / Publish Form" width="300"/>
+**Daftar daftar berita bookmark**  
+melihat hasil bookmark yang di ambil dari lokal storage
+<img src="screenshoot/bookmark.png" alt="Todo / Publish Form" width="300"/>
 
-<img src="screenshoot/detail_news.jpeg" alt="Todo / Publish Form" width="300"/>
-
-**Todo**  
-publish message title dan desc ke mqtt dan subcribe juga untuk ditampilkan, data sebelumnya di simpan di local storage menggunakan hive
+**Daftar daftar berita bookmark**  
+melihat detail berita, title, image, content
+<img src="screenshoot/detail_news.png" alt="Todo / Publish Form" width="300"/>
